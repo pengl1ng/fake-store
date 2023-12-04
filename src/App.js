@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import {useState, useEffect} from 'react'
+import {Routes, Route} from 'react-router-dom';
+import Navbar from './pages/components/navbar/Navbar.js';
+import DropdownNav from './pages/components/dropdown/DropdownNav.js';
+import ProductsList from './pages/ProductsList.js';
+import AddProduct from './pages/AddProduct.js';
+import Authorization from './pages/Authorization.js';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [width, setWidth] = useState(window.innerWidth);
+  const breakpoint = 420;
+
+  useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => {
+      window.removeEventListener('resize', handleResizeWindow);
+    };
+  }, []);
+  if (width <= breakpoint) {
+    return (
+      <div className='App'>
+        <DropdownNav/>
+        <Routes>
+          <Route exact path='/' Component={ProductsList}/>
+          <Route exact path='/addproduct' Component={AddProduct}/>
+          <Route exact path='/auth' Component={Authorization}/>
+        </Routes>
+      </div>
+    )
+  }
+  else {
+    return (
+      <div className="App">
+        <Navbar/>
+        <Routes>
+          <Route exact path='/' Component={ProductsList}/>
+          <Route exact path='/addproduct' Component={AddProduct}/>
+          <Route exact path='/auth' Component={Authorization}/>
+        </Routes>
+      </div>
+    );
+  }
 }
 
 export default App;
