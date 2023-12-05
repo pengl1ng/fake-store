@@ -1,5 +1,17 @@
-.loginForm {
+.formcontainer {
     display: flex;
     flex-direction: column;
 }
 
+h2 {
+    text-align: center;
+}
+
+input {
+    width: 250px;
+    height: 25px;
+}
+
+.formElem {
+    margin: 5px;
+}

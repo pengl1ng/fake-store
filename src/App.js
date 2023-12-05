@@ -8,6 +8,7 @@ import AddProduct from './pages/AddProduct.js';
 import Authorization from './pages/Authorization.js';
 
 function App() {
+  localStorage.setItem('token', "")
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 420;
 
@@ -18,29 +19,38 @@ function App() {
       window.removeEventListener('resize', handleResizeWindow);
     };
   }, []);
-  if (width <= breakpoint) {
-    return (
-      <div className='App'>
-        <DropdownNav/>
-        <Routes>
-          <Route exact path='/' Component={ProductsList}/>
-          <Route exact path='/addproduct' Component={AddProduct}/>
-          <Route exact path='/auth' Component={Authorization}/>
-        </Routes>
-      </div>
-    )
+  if (localStorage.getItem('token') !== "") {
+    if (width <= breakpoint) {
+      return (
+        <div className='App'>
+          <DropdownNav/>
+          <Routes>
+            <Route exact path='/' Component={ProductsList}/>
+            <Route exact path='/addproduct' Component={AddProduct}/>
+            <Route exact path='/auth' Component={Authorization}/>
+          </Routes>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="App">
+          <Navbar/>
+          <Routes>
+            <Route exact path='/' Component={ProductsList}/>
+            <Route exact path='/addproduct' Component={AddProduct}/>
+            <Route exact path='/auth' Component={Authorization}/>
+          </Routes>
+        </div>
+      );
+    }
   }
   else {
     return (
-      <div className="App">
-        <Navbar/>
-        <Routes>
-          <Route exact path='/' Component={ProductsList}/>
-          <Route exact path='/addproduct' Component={AddProduct}/>
-          <Route exact path='/auth' Component={Authorization}/>
-        </Routes>
+      <div className='authContainer'>
+        <Authorization/>
       </div>
-    );
+    )
   }
 }
 
