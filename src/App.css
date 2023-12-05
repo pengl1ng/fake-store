@@ -4,7 +4,9 @@
 }
 
 .authContainer {
+  background-color: #FFC47E;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }

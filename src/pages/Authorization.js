@@ -21,6 +21,7 @@ function Authorization() {
         catch (e) {
     
         }
+        window.location.reload()
     };
 
     return (
@@ -29,9 +30,9 @@ function Authorization() {
                 <div className='formcontainer'>
                     <h2>Авторизация</h2>
                     <input type='login' placeholder='Логин' className='formElem' {...register("username", {required: true})}/>
-                    {errors.login && <p>Неправильный логин</p>}
+                    {errors.login && <p>Неправильный логин или пароль</p>}
                     <input type='password' placeholder='Пароль' className='formElem' {...register("password", {required: true})}/>
-                    {errors.password && <p>Неправильный пароль</p>}
+                    {errors.password && <p>Неправильный логин или пароль</p>}
                     <button className='formButton' type='submit'>Войти</button>
                 </div>
             </form>

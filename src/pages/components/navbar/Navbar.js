@@ -7,9 +7,14 @@ function Navbar() {
         <ul>
             <li><Link to='/'>Список товаров</Link></li>
             <li><Link to='/addproduct'>Добавить товар</Link></li>
-            <li><Link to='/auth'>Авторизация</Link></li>
+            <button onClick={UnAuth}>Выйти</button>
         </ul>
     )
+}
+
+function UnAuth() {
+    localStorage.setItem('token', "")
+    window.location.reload()
 }
 
 export default Navbar;

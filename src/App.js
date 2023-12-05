@@ -26,7 +26,6 @@ function App() {
           <Routes>
             <Route exact path='/' Component={ProductsList}/>
             <Route exact path='/addproduct' Component={AddProduct}/>
-            <Route exact path='/auth' Component={Authorization}/>
           </Routes>
         </div>
       )
@@ -38,7 +37,6 @@ function App() {
           <Routes>
             <Route exact path='/' Component={ProductsList}/>
             <Route exact path='/addproduct' Component={AddProduct}/>
-            <Route exact path='/auth' Component={Authorization}/>
           </Routes>
         </div>
       );
