@@ -8,7 +8,6 @@ import AddProduct from './pages/AddProduct.js';
 import Authorization from './pages/Authorization.js';
 
 function App() {
-  localStorage.setItem('token', "")
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 420;
 
