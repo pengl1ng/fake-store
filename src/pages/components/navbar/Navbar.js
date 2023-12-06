@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom'
 
 function Navbar() {
     return(
-        <ul>
-            <li><Link to='/'>Список товаров</Link></li>
-            <li><Link to='/addproduct'>Добавить товар</Link></li>
-            <button onClick={UnAuth}>Выйти</button>
-        </ul>
+        <div className='header'>
+            <button><Link to='/' className='link'>Список товаров</Link></button>
+            <button><Link to='/addproduct' className='link'>Добавить товар</Link></button>
+            <button className='btn_unlog' onClick={UnAuth}>Выйти</button>
+        </div>
     )
 }
 
