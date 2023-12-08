@@ -6,6 +6,7 @@ import DropdownNav from './pages/components/dropdown/DropdownNav.js';
 import ProductsList from './pages/ProductsList.js';
 import AddProduct from './pages/AddProduct.js';
 import Authorization from './pages/Authorization.js';
+import ProductPage from './pages/ProductPage.js';
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route exact path='/' Component={ProductsList}/>
             <Route exact path='/addproduct' Component={AddProduct}/>
+            <Route exact path='/product/:id' Component={ProductPage}/>
           </Routes>
         </div>
       )
@@ -37,6 +39,7 @@ function App() {
           <Routes>
             <Route exact path='/' Component={ProductsList}/>
             <Route exact path='/addproduct' Component={AddProduct}/>
+            <Route exact path='/product/:id' Component={ProductPage}/>
           </Routes>
         </div>
       );
