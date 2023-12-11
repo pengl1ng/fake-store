@@ -6,17 +6,13 @@ function Authorization() {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async(data) => {
-        console.log(data.username, data.password)
         let user = {
             "username": data.username,
             "password": data.password
         }
-        console.log(JSON.stringify(user))
         try {
             const tok = await GetToken(user);
-            console.log(tok)
             localStorage.setItem('token', tok)
-            console.log(localStorage.getItem('token'))
         }
         catch (e) {
     

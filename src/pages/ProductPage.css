@@ -1,0 +1,29 @@
+.product_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 5px;
+    padding: 5px;
+}
+
+.product_image_container {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-left: 50px;
+}
+
+.product_image {
+    width: 200px;
+    height: auto;
+    max-height: 200px;
+    border-radius: 5px;
+}
+
+.p_product {
+    width: 700px;
+}

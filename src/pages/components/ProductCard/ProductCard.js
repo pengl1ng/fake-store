@@ -13,7 +13,6 @@ const ProductCard = (props) => {
             <p className='cardElem'>{props.product.title}</p>
             <div className='card_footer'>
                 <p>${props.product.price}</p>
-                <button className='card_btn'>Редактировать</button>
             </div>
         </div>
     )

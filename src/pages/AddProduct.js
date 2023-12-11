@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from'axios'
+import './AddProduct.css'
 
 function AddProduct() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -14,9 +15,14 @@ function AddProduct() {
             "category": data.productCategory
         }
         console.log(product)
-        await axios (
-            axios.post("https://fakestoreapi.com/products", product).then(response => alert(response))
-        )
+        try {
+            await axios (
+                axios.post("https://fakestoreapi.com/products", product).then(response => alert('Response status: ' + response.status))
+            )
+        }
+        catch (e) {
+
+        }
     }
 
     return (
@@ -26,7 +32,7 @@ function AddProduct() {
                 <input className='productName' type='text' placeholder='Название' {...register("productTitle", {required: true})}/>
                 <input className='productDesc' type='text' placeholder='Описание' {...register("productDescription", {required: true})}/>
                 <input className='productPrice' type='text' placeholder='Стоимость' {...register("productPrice", {required: true})}/>
-                <input className='productCategory' tupe='text' placeholder='Категория' {...register("productCategory", {required: true})}/>
+                <input className='productCategory' type='text' placeholder='Категория' {...register("productCategory", {required: true})}/>
                 <button type='submit'>Добавить продукт</button>
             </div>
         </form>
