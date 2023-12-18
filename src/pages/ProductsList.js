@@ -4,12 +4,15 @@ import ProductCard from './components/ProductCard/ProductCard';
 import './ProductlList.css'
 
 function ProductsList() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState(JSON.parse(localStorage.getItem('products')) || []);
     useEffect(() => {
-        axios.get("https://fakestoreapi.com/products").then(response => {
-            setProducts(response.data);
-        })
-    }, []);
+        if (products.length === 0) {
+            axios.get("https://fakestoreapi.com/products").then(response => {
+                localStorage.setItem('products', JSON.stringify(response.data))
+                setProducts(JSON.parse(localStorage.getItem('products')))
+            })
+        }
+    }, [products]);
     console.log(products)
     return (
         <div className='card-container'>

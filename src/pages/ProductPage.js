@@ -11,15 +11,12 @@ const ProductPage = () => {
     useEffect(() => {
         const url = window.location.href
         const id = url.substring(url.lastIndexOf("/") + 1)
-        axios.get("https://fakestoreapi.com/products/{id}".replace('{id}', id)).then(response => {
-            setProduct(response.data)
-            console.log(response.data)
-        })
+        setProduct(JSON.parse(localStorage.getItem('products')).find(p => Number(p.id) === Number(id)))
     }, [])
     return (
         <div className='product_container'>
             <div className='product_image_container'>
-                <img className='product_image' src={product.image}/>
+                <img className='product_image' src={product.image} alt='product_image'/>
             </div>
             <div className='rigth_container'>
                 <p className='p_product'>Name: {product.title}</p>
@@ -38,12 +35,14 @@ function DeleteProduct() {
     const id = url.substring(url.lastIndexOf("/") + 1)
     try {
         axios.delete("https://fakestoreapi.com/products/{id}".replace('{id}', id)).then(response => {
-            alert('Response Status' + response.status)
+            alert('Response Status: ' + response.status)
         })
     }
     catch (e) {
 
     }
+    const updatedProducts = JSON.parse(localStorage.getItem('products')).filter(product => Number(product.id) !== Number(id))
+    localStorage.setItem('products', JSON.stringify(updatedProducts))
 }
 
 export default ProductPage

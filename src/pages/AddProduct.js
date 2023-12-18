@@ -23,6 +23,9 @@ function AddProduct() {
         catch (e) {
 
         }
+        const products = JSON.parse(localStorage.getItem("products"))
+        const newProducts = [...products, {...product, id: products[products.length - 1].id + 1}]
+        localStorage.setItem('products', JSON.stringify(newProducts))
     }
 
     return (
