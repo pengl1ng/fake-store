@@ -14,13 +14,18 @@ function EditProductPage() {
     useEffect(() => {
         const url = window.location.href
         const id = url.substring(url.lastIndexOf("/") + 1)
-        setProduct(JSON.parse(localStorage.getItem('products')).find(p => Number(p.id) === Number(id)))
+        console.log(editProduct)
+        if (editProduct.length === 0) {
+            setProduct(JSON.parse(localStorage.getItem('products')).find(p => Number(p.id) === Number(id)))
+            console.log(editProduct)
+        }
+
         setTitle(editProduct.title)
         setDesc(editProduct.description)
         setImg(editProduct.image)
         setPrice(editProduct.price)
         setCategory(editProduct.category)
-    }, [editProduct])
+    }, [editProduct, title])
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
