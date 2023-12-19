@@ -9,7 +9,7 @@ function AddProduct() {
     const onSubmit = async(data) => {
         const product = {
             "title": data.productTitle,
-            "price": data.productPrice,
+            "price": Number(data.productPrice),
             "description": data.productDescription,
             "image": data.productImage,
             "category": data.productCategory
