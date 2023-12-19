@@ -13,6 +13,23 @@ const ProductPage = () => {
         const id = url.substring(url.lastIndexOf("/") + 1)
         setProduct(JSON.parse(localStorage.getItem('products')).find(p => Number(p.id) === Number(id)))
     }, [])
+
+    const DeleteProduct = () => {
+        const url = window.location.href
+        const id = url.substring(url.lastIndexOf("/") + 1)
+        try {
+            axios.delete("https://fakestoreapi.com/products/{id}".replace('{id}', id)).then(response => {
+                alert('Response Status: ' + response.status)
+            })
+        }
+        catch (e) {
+    
+        }
+        const updatedProducts = JSON.parse(localStorage.getItem('products')).filter(product => Number(product.id) !== Number(id))
+        localStorage.setItem('products', JSON.stringify(updatedProducts))
+        navigate('/')
+    }
+
     return (
         <div className='product_container'>
             <div className='product_image_container'>
@@ -23,27 +40,11 @@ const ProductPage = () => {
                 <p className='p_product'>Description: {product.description}</p>
                 <p className='p_product'>Category: {product.category}</p>
                 <p className='p_product'>Price: ${product.price}</p>
-                <button onClick={DeleteProduct(navigate)}>Удалить</button>
+                <button onClick={DeleteProduct}>Удалить</button>
                 <button onClick={() => navigate("/editproduct/{id}".replace('{id}', id))}>Редактировать</button>
             </div>
         </div>
     )
-}
-
-function DeleteProduct(navigate) {
-    const url = window.location.href
-    const id = url.substring(url.lastIndexOf("/") + 1)
-    try {
-        axios.delete("https://fakestoreapi.com/products/{id}".replace('{id}', id)).then(response => {
-            alert('Response Status: ' + response.status)
-        })
-    }
-    catch (e) {
-
-    }
-    const updatedProducts = JSON.parse(localStorage.getItem('products')).filter(product => Number(product.id) !== Number(id))
-    localStorage.setItem('products', JSON.stringify(updatedProducts))
-    navigate("/")
 }
 
 export default ProductPage
