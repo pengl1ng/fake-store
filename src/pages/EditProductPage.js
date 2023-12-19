@@ -9,7 +9,7 @@ function EditProductPage() {
     const [title, setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const [img, setImg] = useState('')
-    const [price, setPrice] = useState('')
+    const [price, setPrice] = useState(Number(0))
     const [category, setCategory] = useState('')
 
     useEffect(() => {
@@ -71,7 +71,7 @@ function EditProductPage() {
                 name='title' placeholder='Название'/>
                 <input className='productDesc' defaultValue={desc} type='text' onChange={event => setDesc(event.target.value)}
                 name='desc' placeholder='Описание'/>
-                <input className='productPrice' defaultValue={price} type='text' onChange={event => setPrice(event.target.value)}
+                <input className='productPrice' defaultValue={price} type='text' onChange={event => setPrice(Number(event.target.value))}
                 name='price' placeholder='Стоимость'/>
                 <input className='productCategory' defaultValue={category} type='text' onChange={event => setCategory(event.target.value)}
                 name='category' placeholder='Категория'/>
