@@ -23,14 +23,14 @@ const ProductPage = () => {
                 <p className='p_product'>Description: {product.description}</p>
                 <p className='p_product'>Category: {product.category}</p>
                 <p className='p_product'>Price: ${product.price}</p>
-                <button onClick={DeleteProduct}>Удалить</button>
+                <button onClick={DeleteProduct(navigate)}>Удалить</button>
                 <button onClick={() => navigate("/editproduct/{id}".replace('{id}', id))}>Редактировать</button>
             </div>
         </div>
     )
 }
 
-function DeleteProduct() {
+function DeleteProduct(navigate) {
     const url = window.location.href
     const id = url.substring(url.lastIndexOf("/") + 1)
     try {
@@ -43,6 +43,7 @@ function DeleteProduct() {
     }
     const updatedProducts = JSON.parse(localStorage.getItem('products')).filter(product => Number(product.id) !== Number(id))
     localStorage.setItem('products', JSON.stringify(updatedProducts))
+    navigate("/")
 }
 
 export default ProductPage

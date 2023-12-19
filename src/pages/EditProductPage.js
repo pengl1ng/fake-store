@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import './EditProductPage.css'
 import axios from 'axios'
-import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom'
 
 function EditProductPage() {
+    const navigate = useNavigate()
     const [editProduct, setProduct] = useState([])
     const [title, setTitle] = useState('')
     const [desc, setDesc] = useState('')
@@ -25,36 +26,32 @@ function EditProductPage() {
         setImg(editProduct.image)
         setPrice(editProduct.price)
         setCategory(editProduct.category)
-    }, [editProduct, title])
+    }, [editProduct])
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
-    const onSubmit = async(data) => {
+    const onSubmit = () => {
         const url = window.location.href
         const id = url.substring(url.lastIndexOf("/") + 1)
         const editedProduct = {
-            "title": data.productTitle,
-            "price": data.productPrice,
-            "description": data.productDescription,
-            "image": data.productImage,
-            "category": data.productCategory
+            "title": title,
+            "price": price,
+            "description": desc,
+            "image": img,
+            "category": category
         }
         console.log(editedProduct)
         try {
-            await axios (
-                axios.put("https://fakestoreapi.com/products/{id}".replace('{id}', id), editedProduct).then(response => alert('Response status: ' + response.status))
-            )
+            axios.put("https://fakestoreapi.com/products/{id}".replace('{id}', id), editedProduct).then(response => alert('Response status: ' + response.status))
         }
         catch (e) {
 
         }
         const editedProduct1 = {
             "id": id,
-            "title": data.productTitle,
-            "price": data.productPrice,
-            "description": data.productDescription,
-            "image": data.productImage,
-            "category": data.productCategory
+            "title": title,
+            "price": price,
+            "description": desc,
+            "image": img,
+            "category": category
         }
 
         const products = JSON.parse(localStorage.getItem('products'))
@@ -62,21 +59,22 @@ function EditProductPage() {
             product.id === editProduct.id ? editedProduct1 : product
         )
         localStorage.setItem('products', JSON.stringify(newProducts))
+        navigate("/")
     }
 
     return (
-        <form className='editProduct' onSubmit={handleSubmit(onSubmit)}>
+        <form className='editProduct' onSubmit={onSubmit}>
             <div className='edit_container'>
                 <input className='productImgLink' defaultValue={img} type='text' onChange={event => setImg(event.target.value)}
-                name='img' placeholder='Ссылка на картинку' {...register("productImage", {required: true})}/>
+                name='img' placeholder='Ссылка на картинку'/>
                 <input className='productName' defaultValue={title} type='text' onChange={event => setTitle(event.target.value)}
-                name='title' placeholder='Название' {...register("productTitle", {required: true})}/>
+                name='title' placeholder='Название'/>
                 <input className='productDesc' defaultValue={desc} type='text' onChange={event => setDesc(event.target.value)}
-                name='desc' placeholder='Описание' {...register("productDescription", {required: true})}/>
+                name='desc' placeholder='Описание'/>
                 <input className='productPrice' defaultValue={price} type='text' onChange={event => setPrice(event.target.value)}
-                name='price' placeholder='Стоимость' {...register("productPrice", {required: true})}/>
+                name='price' placeholder='Стоимость'/>
                 <input className='productCategory' defaultValue={category} type='text' onChange={event => setCategory(event.target.value)}
-                name='category' placeholder='Категория' {...register("productCategory", {required: true})}/>
+                name='category' placeholder='Категория'/>
                 <button type='submit'>Обновить товар</button>
             </div>
         </form>
